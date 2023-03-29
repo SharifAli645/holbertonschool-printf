@@ -51,6 +51,7 @@ int _printf(const char *format, ...)
 		}
 		i++;
 	}
+	_putchar(10);
 	va_end(args);
 	return (counter);
 }
