@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stddef.h>
 #include <stdarg.h>
 /**
  * _printf - function that produces output according to a format
@@ -14,6 +15,8 @@ int _printf(const char *format, ...)
 	char *z;
 	va_list args;
 
+	if (format == NULL)
+		return (-1);
 	va_start(args, format);
 	while (format[i])
 	{
