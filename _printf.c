@@ -18,25 +18,25 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-		i++;
-		switch (format[i])
-		{
-			case 'c':
-				x = va_arg(args, int);
-				_putchar(x);
-				break;
-			case 's':
-				z = va_arg(args, char *);
-				while(*z)
-				{
-					_putchar(*z);
-					z++;
-				}
-				break;
-			default:
-				_putchar(format[i]);
-				break;
-		}
+			i++;
+			switch (format[i])
+			{
+				case 'c':
+					x = va_arg(args, int);
+					_putchar(x);
+					break;
+				case 's':
+					z = va_arg(args, char *);
+					while (*z)
+					{
+						_putchar(*z);
+						z++;
+					}
+					break;
+				default:
+					_putchar(format[i]);
+					break;
+			}
 		} else
 		{
 			_putchar(format[i]);
