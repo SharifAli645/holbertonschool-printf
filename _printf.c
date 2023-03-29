@@ -10,6 +10,7 @@ int _printf(const char *format, ...)
 {
 	int i = 0;
 	int x;
+	int counter = 0;
 	char *z;
 	va_list args;
 
@@ -24,6 +25,7 @@ int _printf(const char *format, ...)
 				case 'c':
 					x = va_arg(args, int);
 					_putchar(x);
+					counter++;
 					break;
 				case 's':
 					z = va_arg(args, char *);
@@ -31,18 +33,21 @@ int _printf(const char *format, ...)
 					{
 						_putchar(*z);
 						z++;
+						counter++;
 					}
 					break;
 				default:
 					_putchar(format[i]);
+					counter++;
 					break;
 			}
 		} else
 		{
 			_putchar(format[i]);
+			counter++;
 		}
 		i++;
 	}
 	va_end(args);
-	return (0);
+	return (counter);
 }
