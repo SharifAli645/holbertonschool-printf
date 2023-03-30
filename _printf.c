@@ -1,6 +1,6 @@
-#include "main.h"
 #include <stddef.h>
 #include <stdarg.h>
+#include "main.h"
 /**
  * _printf - function that produces output according to a format
  * @format: is a character string
@@ -9,49 +9,36 @@
  **/
 int _printf(const char *format, ...)
 {
+	printer arr[] = {
+		{"c", print_char},
+		{"s", print_str},
+		{NULL, NULL}
+	};
 	int i = 0;
-	int x;
-	int counter = 0;
-	char *z;
-	va_list args;
+	int e = 0;
+	int cnt = 0;
+	va_list arg;
 
-	if (format == NULL)
-		return (-1);
-	va_start(args, format);
+	va_start(arg, format);
 	while (format[i])
 	{
-		if (format[i] == '%')
-		{
-			i++;
-			switch (format[i])
-			{
-				case 'c':
-					x = va_arg(args, int);
-					_putchar(x);
-					counter++;
-					break;
-				case 's':
-					z = va_arg(args, char *);
-					while (*z)
-					{
-						_putchar(*z);
-						z++;
-						counter++;
-					}
-					break;
-				default:
-					_putchar(format[i]);
-					counter++;
-					break;
-			}
-		} else
+		if (format[i] != '%')
 		{
 			_putchar(format[i]);
-			counter++;
+			cnt++;
+			i++;
+		} else if (format[i] == '%')
+		{
+			i++;
+			while (*((arr + e)->ch) != format[i] && (arr[e].ch) != NULL)
+				e++;
+			if (arr[e].ch != NULL)
+			{
+				cnt = cnt + (arr + e)->f(arg);
+				i++;
+			}
 		}
-		i++;
+		e = 0;
 	}
-	_putchar(10);
-	va_end(args);
-	return (counter);
+	return (cnt);
 }
