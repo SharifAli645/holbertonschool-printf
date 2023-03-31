@@ -11,6 +11,8 @@ int _printf(const char *format, ...)
 	printer arr[] = {
 		{"c", print_char},
 		{"s", print_str},
+		{"i", print_int},
+		{"d", print_int},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -18,6 +20,8 @@ int _printf(const char *format, ...)
 	int cnt = 0;
 	va_list arg;
 
+	if (format == NULL)
+		return (0);
 	va_start(arg, format);
 	while (format[i])
 	{
