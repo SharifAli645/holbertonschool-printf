@@ -9,36 +9,36 @@
  **/
 int _printf(const char *format, ...)
 {
-	printer arr[] = {
-		{"c", print_char},
-		{"s", print_str},
-		{NULL, NULL}
-	};
 	int i = 0;
-	int e = 0;
-	int cnt = 0;
-	va_list arg;
+	va_list ptr;
+	int (*print)(va_list) = NULL;
 
-	va_start(arg, format);
-	while (format[i])
+	va_start (ptr, format);
+
+	while (*format)
 	{
-		if (format[i] != '%')
+		if (*format == '%' && *(format + 1) != '%')
 		{
-			_putchar(format[i]);
-			cnt++;
-			i++;
-		} else if (format[i] == '%')
-		{
-			i++;
-			while (*((arr + e)->ch) != format[i] && (arr[e].ch) != NULL)
-				e++;
-			if (arr[e].ch != NULL)
-			{
-				cnt = cnt + (arr + e)->f(arg);
-				i++;
-			}
+			format++;
+			print = get_func(format);
+			if (*(format) == '\0')
+				return (-1);
+			else
+				i += print(ptr);
 		}
-		e = 0;
+		else if (*format == '%' && *(format + 1) == '%')
+		{
+			format++;
+			_putchar('%');
+			i++;
+		}
+		else
+		{
+			_putchar(*format);
+			i++;
+		}
+		format++;
 	}
-	return (cnt);
+	va_end(ptr);
+	return (i);
 }

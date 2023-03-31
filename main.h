@@ -8,6 +8,7 @@ typedef struct printer
 } printer;
 int _printf(const char *format, ...);
 int _putchar(char c);
+int (*get_func(const char *recognizer))(va_lis);
 int print_char(va_list ptr);
-int print_str(va_list ptr);
+int print_string(va_list ptr);
 #endif
