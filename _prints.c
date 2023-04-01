@@ -30,7 +30,7 @@ int print_str(va_list ptr)
 			_putchar(*nl);
 			nl++;
 		}
-		return (3);
+		return (6);
 	}
 	while (*z)
 	{
