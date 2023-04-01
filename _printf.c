@@ -20,7 +20,6 @@ int s_printf(const char *format, printer arr[], va_list arg, int i, int e,
 		{
 			_putchar(format[i]);
 			cnt++;
-			i++;
 		} else if (format[i] == '%' && (format[i + 1] == 'c' ||
 		format[i + 1] == 's' || format[i + 1] == 'i' || format[i + 1] == 'd'))
 		{
@@ -28,14 +27,15 @@ int s_printf(const char *format, printer arr[], va_list arg, int i, int e,
 			while (*((arr + e)->ch) != format[i])
 				e++;
 			cnt = cnt + (arr + e)->f(arg);
-			i++;
 		} else
 		{
-			_putchar(format[i]);
-			_putchar(format[i + 1]);
-			i = i + 2;
-			cnt = cnt + 2;
+			if (format[i + 1] == '%')
+				_putchar(format[i++]);
+			else if (format)
+				_putchar(format[i]);
+			cnt++;
 		}
+		i++;
 		e = 0;
 	}
 	return (cnt);
@@ -61,7 +61,7 @@ int _printf(const char *format, ...)
 	va_list arg;
 
 	if (format == NULL)
-		return (0);
+		return (-1);
 	va_start(arg, format);
 	cnt = s_printf(format, arr, arg, i, e, cnt);
 	return (cnt);
