@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stddef.h>
 /**
  * print_char - function that prints 1 character
  * @ptr: a list
@@ -20,7 +21,17 @@ int print_str(va_list ptr)
 {
 	int cnt = 0;
 	char *z = va_arg(ptr, char *);
+	char *nl = "(null)";
 
+	if (z == NULL)
+	{
+		while (*nl)
+		{
+			_putchar(*nl);
+			nl++;
+		}
+		return (3);
+	}
 	while (*z)
 	{
 		_putchar(*z);
