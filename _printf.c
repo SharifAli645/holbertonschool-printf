@@ -1,6 +1,46 @@
 #include "main.h"
 #include <stddef.h>
 /**
+ * s_printf - function called for -printf
+ * @format: format
+ * @arr: array
+ * @i: counter
+ * @arg: list
+ * @e: counter
+ * @cnt: counter of characters
+ *
+ * Return: number of characters
+ **/
+int s_printf(const char *format, printer arr[], va_list arg, int i, int e,
+		int cnt)
+{
+	while (format[i])
+	{
+		if (format[i] != '%')
+		{
+			_putchar(format[i]);
+			cnt++;
+			i++;
+		} else if (format[i] == '%' && (format[i + 1] == 'c' ||
+		format[i + 1] == 's' || format[i + 1] == 'i' || format[i + 1] == 'd'))
+		{
+			i++;
+			while (*((arr + e)->ch) != format[i])
+				e++;
+			cnt = cnt + (arr + e)->f(arg);
+			i++;
+		} else
+		{
+			_putchar(format[i]);
+			_putchar(format[i + 1]);
+			i = i + 2;
+			cnt = cnt + 2;
+		}
+		e = 0;
+	}
+	return (cnt);
+}
+/**
  * _printf - function that produces output according to a format
  * @format: format
  *
@@ -23,25 +63,6 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (0);
 	va_start(arg, format);
-	while (format[i])
-	{
-		if (format[i] != '%')
-		{
-			_putchar(format[i]);
-			cnt++;
-			i++;
-		} else if (format[i] == '%')
-		{
-			i++;
-			while (*((arr + e)->ch) != format[i] && (arr[e].ch) != NULL)
-				e++;
-			if (arr[e].ch != NULL)
-			{
-				cnt = cnt + (arr + e)->f(arg);
-				i++;
-			}
-		}
-		e = 0;
-	}
+	cnt = s_printf(format, arr, arg, i, e, cnt);
 	return (cnt);
 }
