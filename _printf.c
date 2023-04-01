@@ -29,7 +29,9 @@ int s_printf(const char *format, printer arr[], va_list arg, int i, int e,
 			cnt = cnt + (arr + e)->f(arg);
 		} else
 		{
-			if (format[i + 1] == '%')
+			if (format[i + 1] == '\0')
+				return (-1);
+			else if (format[i + 1] == '%')
 				_putchar(format[i++]);
 			else if (format)
 				_putchar(format[i]);
