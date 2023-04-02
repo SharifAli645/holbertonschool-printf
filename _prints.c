@@ -48,8 +48,8 @@ int print_str(va_list ptr)
  **/
 int print_int(va_list ptr)
 {
-	int tmp = va_arg(ptr, int);
-	int tmp1 = tmp;
+	long int tmp = va_arg(ptr, int);
+	long int tmp1 = tmp;
 	int cnt = 0;
 
 	if (tmp < 0)
@@ -73,9 +73,9 @@ int print_int(va_list ptr)
  *
  * Return: Always void
  **/
-void int_to_string(int n)
+void int_to_string(long int n)
 {
-	int num = n;
+	long int num = n;
 
 	if (num / 10)
 		int_to_string(num / 10);

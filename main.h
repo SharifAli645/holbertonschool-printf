@@ -13,5 +13,5 @@ int s_printf(const char *format, printer arr[], va_list arg, int i, int e,
 int print_char(va_list ptr);
 int print_str(va_list ptr);
 int print_int(va_list ptr);
-void int_to_string(int n);
+void int_to_string(long int n);
 #endif
