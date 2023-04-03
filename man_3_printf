@@ -1,0 +1,73 @@
+.TH _printf "02 April 2023" "_printf man page"
+.SH NAME
+
+.B _printf - Format and print data in screen.
+.SH SYNOPSIS
+
+.IP
+.I _printf FORMAT [ARGUMENT]...
+.IP
+.I _printf [OPTIONS]
+.SH DESCRIPTION
+
+The _printf function (whis derives its name from "pront formated) write output to stdout using the format string. The format string is comprised of 0 or more directives and contains specifiers beginning with the character \(dq%)\(dq). the specifier use the corresponding argument to print the variable.
+
+.SH RETURN VALUE
+The _pritf function returns the number of characters written, If it returns a negative value it indicates that an error has ocurred.
+
+.SH ESPECIFIERS
+
+The symbol "%" denotes the beginnig of the format mark. Every brand, therefore, begind with the symbol "%" and ends with its type. Each of the names (parameter, flags, with, precision, length and type) represents a set of possible values that are explained below.
+
+.TH 
+d, i 
+The argument is printed in signed decimal notation
+
+.TH 
+u
+The \fIinsigned int\fR argument is printed in unsigned decimal notation
+
+.TP
+o
+The \fIunsigned int\fR argument is printed in unsigned octal notation
+
+.TP
+x, X
+The \fIunsigned int\fR argument is printed in unsigned hexadecimal notation. The letters \(ABCDEF)\dq are use for X and the letters \(abcdef)\de are use for the letter x.
+
+.TP
+b
+The \fIint\fR argument is printed in unsigned binary notation.
+
+.TP
+c
+The \fIunsinged int\fR argument is converted to an \fIunsinged char\fR and printed.
+
+.TP
+s
+The \fIconst char *\ fR argument is expected to be a pointer ti a character array. Charaters up to, but not including the terminated null byte are written.
+
+.TP
+%
+A '%' is written. No argunment is converted.
+
+.TP
+p
+The \fIvoid *\fR point argument is printed in hexadecimal format beginning with '0x'.
+
+.SH EXAMPLE
+.IP
+.B _printf("The value is %d", counter);
+.IP
+.B The %d mark is replaced bye the value of the variable counter and the resulting string is printed.
+
+.SH BUGS 
+At the moment we don't have errors.
+
+.SH NOTES
+At the moment we don't have support for "=", "#", "-", space, field width, 0 flag characcter, reverse, Rot13, and the special characters
+
+.SH AUTHORS
+Ali Abuhadba, Mauricio Aguilar and Francisco Sono
+
+.SH This is a project for Holberton School (02/04/2023)
